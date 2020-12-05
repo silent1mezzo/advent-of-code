@@ -1,10 +1,13 @@
-SEATS = []
 LOW_CHARS = ['F', 'L']
+seat_ids = []
 
 def process_seats():
     with open('input.txt') as reader:
         for line in reader.readlines():
-            SEATS.append(line.strip())
+            seat = line.strip()
+            seat_row = seat_search(seat[:7], 0, 0, 127)
+            seat_col = seat_search(seat[7:10], 0, 0, 7)
+            seat_ids.append(seat_row * 8 + seat_col)
 
 def seat_search(seat, array_idx, low=0, high=127):
     mid = (high + low) // 2
@@ -23,24 +26,9 @@ def seat_search(seat, array_idx, low=0, high=127):
 
 
 def part_1():
-    max_seat = 0
-    for seat in SEATS:
-        seat_row = seat_search(seat[:7], 0, 0, 127)
-        seat_col = seat_search(seat[7:10], 0, 0, 7)
-        seat_id = seat_row * 8 + seat_col
-        if seat_id > max_seat:
-            max_seat = seat_id
-
-    return max_seat
+    return max(seat_ids)
 
 def part_2():
-    seat_ids = []
-    for seat in SEATS:
-        seat_row = seat_search(seat[:7], 0, 0, 127)
-        seat_col = seat_search(seat[7:10], 0, 0, 7)
-        seat_id = seat_row * 8 + seat_col
-        seat_ids.append(seat_id)
-
     # Sum up all of the seat IDs from the lowest one to the highest one.
     expected_total = sum(range(min(seat_ids), max(seat_ids)+1))
     
