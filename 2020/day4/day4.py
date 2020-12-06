@@ -4,7 +4,7 @@ OPTIONAL_FIELDS = ['cid']
 
 passports = []
 def process_passports():
-    with open('input.txt') as reader:
+    with open('input-meredith.txt') as reader:
         passport = {}
         for line in reader.readlines():
             # Blank new line, flush passport to passports
