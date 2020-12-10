@@ -36,5 +36,5 @@ def part_2():
             count += 1
 
 
-#rint("Answer for part 1: {}".format(part_1()))
+print("Answer for part 1: {}".format(part_1()))
 print("Answer for part 2: {}".format(part_2()))
