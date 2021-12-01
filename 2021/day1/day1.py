@@ -38,5 +38,5 @@ def part_2():
 
 
 read_input()
-print("Answer for part 1: {}".format(part_1()))
-print("Answer for part 2: {}".format(part_2()))
+print(f"Answer for part 1: {part_1()}")
+print(f"Answer for part 2: {part_2()}")
