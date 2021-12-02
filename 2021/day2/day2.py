@@ -8,7 +8,8 @@ def read_input():
 
 
 def parse_line(line):
-    return line.split()
+    direction, unit = line.split()
+    return direction, int(unit)
 
 
 def part_1():
@@ -17,7 +18,6 @@ def part_1():
     depth = 0
     for direction in directions:
         direction, unit = parse_line(direction)
-        unit = int(unit)
         if direction == "forward":
             horizontal += unit
         elif direction == "down":
@@ -35,8 +35,6 @@ def part_2():
     aim = 0
     for direction in directions:
         direction, unit = parse_line(direction)
-        unit = int(unit)
-
         if direction == "forward":
             horizontal += unit
             depth += aim * unit
