@@ -3,13 +3,29 @@ data = []
 def read_input():
     with open('input.txt') as reader:
         for line in reader.readlines():
-            data.append(int(line))
+            data.append(line)
 
 def part_1():
-    pass
+    sum = 0
+    for line in data:
+        first, second = line[:len(line)//2], line[len(line)//2:]
+        character = ''.join(set(first).intersection(second))
+        if character.isupper():
+            sum += ord(character) - 38
+        else:
+            sum += ord(character) - 96
+    return sum
 
 def part_2():
-    pass
+    sum = 0
+    for i, x in enumerate(data):
+        if i % 3 == 0:
+            character = ''.join(set(x).intersection(data[i+1]).intersection(data[i+2])).strip()
+            if character.isupper():
+                sum += ord(character) - 38
+            else:
+                sum += ord(character) - 96
+    return sum
 
 
 read_input()
