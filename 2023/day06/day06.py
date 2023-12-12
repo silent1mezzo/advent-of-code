@@ -1,16 +1,54 @@
-data = []
+import re
 
+TIMES = []
+DISTANCES = []
 def read_input():
     with open('input.txt') as reader:
-        for line in reader.readlines():
-            data.append(int(line))
+        TIMES.extend(re.findall(r'\d+', reader.readline()))
+        DISTANCES.extend(re.findall(r'\d+', reader.readline()))
 
 def part_1():
-    pass
+    result = 0
+    for index, time in enumerate(TIMES):
+        speed = 0
+        max_time = int(time)
+        wins = 0
+        for x in range(max_time):
+            speed = x
+            time_left = max_time - x
+            distance = speed * time_left
+
+            if distance > int(DISTANCES[index]):
+                wins += 1
+
+        if result == 0:
+            result = wins
+        else:
+            result *= wins
+
+    return result
+
 
 def part_2():
-    pass
+    TIME = int(''.join(TIMES))
+    DISTANCE = int(''.join(DISTANCES))
+    
+    result = 0
+    speed = 0
+    wins = 0
+    for x in range(TIME):
+        speed = x
+        time_left = TIME - x
+        distance = speed * time_left
+        if distance > DISTANCE:
+            wins += 1
 
+    if result == 0:
+        result = wins
+    else:
+        result *= wins
+
+    return result
 
 read_input()
 print(f"Answer for part 1: {part_1()}")
