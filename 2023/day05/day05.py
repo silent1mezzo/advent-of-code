@@ -1,4 +1,5 @@
 import re
+import time
 
 SEEDS = []
 
@@ -65,6 +66,20 @@ def get_map_value(source, MAP):
     return source
 
 
+def process_seeds(SEEDS):
+    MODIFIED_SEEDS = []
+    skip_next = False
+    for index, seed in enumerate(SEEDS):
+        if skip_next == True:
+            skip_next = False
+            continue
+
+        skip_next = True  
+        seed = int(seed)      
+
+        MODIFIED_SEEDS.extend(range(seed, seed+int(SEEDS[index+1])))
+
+    return MODIFIED_SEEDS
 
 def part_1():
     min_location = -1
@@ -82,7 +97,27 @@ def part_1():
     return min_location
 
 def part_2():
-    pass
+    start = time.time()
+    MODIFIED_SEEDS = process_seeds(SEEDS)
+    end = time.time()
+    print(end - start)
+    min_location = -1
+    start = time.time()
+    for seed in MODIFIED_SEEDS:
+        soil = get_map_value(seed, SEED_TO_SOIL)
+        fert = get_map_value(soil, SOIL_TO_FERT)
+        water = get_map_value(fert, FERT_TO_WATER)
+        light = get_map_value(water, WATER_TO_LIGHT)
+        temp = get_map_value(light, LIGHT_TO_TEMP)
+        humidity = get_map_value(temp, TEMP_TO_HUMIDITY)
+        location = get_map_value(humidity, HUMIDITY_TO_LOCATION)
+        if min_location == -1 or location <= min_location:
+            min_location = location
+    end = time.time()
+    print(end - start)
+    
+
+    return min_location
 
 
 read_input()
