@@ -97,12 +97,9 @@ def part_1():
     return min_location
 
 def part_2():
-    start = time.time()
     MODIFIED_SEEDS = process_seeds(SEEDS)
-    end = time.time()
-    print(end - start)
     min_location = -1
-    start = time.time()
+
     for seed in MODIFIED_SEEDS:
         soil = get_map_value(seed, SEED_TO_SOIL)
         fert = get_map_value(soil, SOIL_TO_FERT)
@@ -113,10 +110,7 @@ def part_2():
         location = get_map_value(humidity, HUMIDITY_TO_LOCATION)
         if min_location == -1 or location <= min_location:
             min_location = location
-    end = time.time()
-    print(end - start)
     
-
     return min_location
 
 
