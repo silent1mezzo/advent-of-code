@@ -1,15 +1,34 @@
+import re
 data = []
 
 def read_input():
     with open('input.txt') as reader:
         for line in reader.readlines():
-            data.append(int(line))
+            data.append([int(num) for num in line.split()])
+
+def get_value(row, direction):
+    if all(x == 0 for x in row):
+        return 0
+    else:
+        diff = [row[i + 1] - row[i] for i in range(len(row) - 1)]
+        if direction == 'forward':
+            return row[-1] + get_value(diff, 'forward')
+        elif direction == 'backward':
+            return row[0] - get_value(diff, 'backward')
 
 def part_1():
-    pass
+    sum = 0
+    for row in data:
+        sum += get_value(row, 'forward')
+
+    return sum
 
 def part_2():
-    pass
+    sum = 0
+    for row in data:
+        sum += get_value(row, 'backward')
+
+    return sum
 
 
 read_input()
