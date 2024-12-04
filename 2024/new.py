@@ -2,12 +2,13 @@ from argparse import ArgumentParser
 from pathlib import Path
 
 PYTHON_TEMPLATE = """
+import re
 data = []
 
 def read_input():
     with open('input.txt') as reader:
         for line in reader.readlines():
-            data.append(int(line))
+            data.append(line)
 
 def part_1():
     pass
